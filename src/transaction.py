@@ -7,6 +7,7 @@
 ##
 import tabulate # pretty printing tables
 from itertools import count # creating unique id in classes
+from payments import calc_discount
 
 
 ##
@@ -37,6 +38,32 @@ class Transaction:
                 break
 
         return result
+
+
+    def calc_basket_price(self) -> float:
+        """Calculate basket price before discounts."""
+        
+        # Variable to store prices
+        basket_price = 0
+
+        # Calculate basket price by iterating thru the cart
+        for line_item in self.cart:
+            basket_price += line_item.get("qty") * line_item.get("price")
+
+        return basket_price
+
+
+    def print_price_breakdown(self) -> None:
+        """Prints total payable price of the shopping cart, after discounts."""
+        
+        basket_price = self.calc_basket_price()
+        discount_price = calc_discount(basket_price)
+        payable_price = basket_price - discount_price
+
+        print("Your price breakdown:")
+        print(f"Basket price: {basket_price}")
+        print(f"Discount: {discount_price}")
+        print(f"You pay: {payable_price}\n")
 
 
     def check_order(self) -> None:
@@ -123,24 +150,38 @@ class Transaction:
 if __name__ == "__main__":
     t = Transaction()
 
-    # Test: adding items
-    print("== Add Item ==")
-    t.add_item(name=100, qty="Tempe", price=100.00)
-    t.add_item(name="Tempe", qty=0, price=100.00)
-    t.add_item(name="Tempe", qty=100, price=100.00)
-    t.add_item(name="Tempe", qty=1, price=100.00)
-    t.check_order()
+    # # Test: adding items
+    # print("== Add Item ==")
+    # t.add_item(name=100, qty="Tempe", price=100.00)
+    # t.add_item(name="Tempe", qty=0, price=100.00)
+    # t.add_item(name="Tempe", qty=100, price=100.00)
+    # t.add_item(name="Tempe", qty=1, price=100.00)
+    # t.check_order()
 
-    # Test: delete item
-    print("== Delete Item ==")
-    t.add_item(name="Tahu", qty=10, price=100.00)
-    t.delete_item(name="Combro")
-    t.check_order()
-    t.delete_item(name="Tahu")
-    t.check_order()
+    # # Test: delete item
+    # print("== Delete Item ==")
+    # t.add_item(name="Tahu", qty=10, price=100.00)
+    # t.delete_item(name="Combro")
+    # t.check_order()
+    # t.delete_item(name="Tahu")
+    # t.check_order()
 
-    # Test: reset order
-    t.add_item(name="Tempe", qty=100, price=100.00)
-    t.check_order()
-    t.reset_transaction()
-    t.check_order()
+    # # Test: reset order
+    # t.add_item(name="Tempe", qty=100, price=100.00)
+    # t.check_order()
+    # t.reset_transaction()
+    # t.check_order()
+
+    # Test: payments
+    t.add_item(name="Tempe", qty=1, price=200000)
+    print("200k basket: 0 discount")
+    t.print_price_breakdown()
+    t.add_item(name="Tahu", qty=1, price=100000)
+    print("300k basket: 0.05 discount")
+    t.print_price_breakdown()
+    t.add_item(name="Combro", qty=1, price=200000)
+    print("500k basket: 0.08 discount")
+    t.print_price_breakdown()
+    t.add_item(name="Yoyoyo", qty=1, price=1)
+    print("500k +1 basket: 0.1 discount")
+    t.print_price_breakdown()
