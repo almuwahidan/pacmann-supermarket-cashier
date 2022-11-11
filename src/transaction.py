@@ -63,19 +63,19 @@ class Transaction:
         # Return error if arguments are of different type
         # TODO -- handle price data type
         if not (isinstance(name, str) and isinstance(qty, int)):
-            print("System error: Failed to add new item.")
+            print("App error: Failed to add new item.")
             print("Please check the input:")
             print("- Name should be text")
             print("- Quantity should be integer\n")
 
         # If quantity is 0, return error
         elif qty == 0:
-            print("System error: Failed to add new item.")
+            print("App error: Failed to add new item.")
             print("Cannot add item with 0 quantity.\n")
         
         # If duplicates, then return error
         elif self.is_in_cart(name) == True:
-            print("System error: Failed to add new item.")
+            print("App error: Failed to add new item.")
             print("An item with the same name is already in the system.")
             print("Please recheck name, or update the item instead.\n")
         
@@ -90,6 +90,31 @@ class Transaction:
             print(f"{qty}x {name} has been added to the cart.\n")
 
 
+    def delete_item(self, name) -> None:
+        """Delete an item from the shopping cart."""
+
+        is_found = False
+
+        # Return error if arguments are of different type
+        if not isinstance(name, str):
+            print("App error: Failed to remove item.")
+            print("Please check the input: Name should be text.\n")
+
+        # iterate thru the cart, delete first occurence of item
+        else :
+            for line_item in self.cart:
+
+                if line_item.get("name").lower() == name.lower():
+                    print(f"{line_item.get('qty')}x {line_item.get('name')} has been removed from the cart.\n")
+                    self.cart.remove(line_item)
+                    is_found = True
+                    break
+
+        # return error if item is not found
+        if is_found == False:
+            print(f"Delete item failed: {name} is not found.\n")
+
+
 
 ##
 # Module testing
@@ -97,8 +122,24 @@ class Transaction:
 
 if __name__ == "__main__":
     t = Transaction()
+
+    # Test: adding items
+    print("== Add Item ==")
     t.add_item(name=100, qty="Tempe", price=100.00)
     t.add_item(name="Tempe", qty=0, price=100.00)
+    t.add_item(name="Tempe", qty=100, price=100.00)
+    t.add_item(name="Tempe", qty=1, price=100.00)
+    t.check_order()
+
+    # Test: delete item
+    print("== Delete Item ==")
+    t.add_item(name="Tahu", qty=10, price=100.00)
+    t.delete_item(name="Combro")
+    t.check_order()
+    t.delete_item(name="Tahu")
+    t.check_order()
+
+    # Test: reset order
     t.add_item(name="Tempe", qty=100, price=100.00)
     t.check_order()
     t.reset_transaction()
