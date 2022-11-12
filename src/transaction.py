@@ -25,6 +25,7 @@ class Transaction:
         """Initializing this class with only an empty cart."""
         self.id = next(Transaction.counter)
         self.cart = []
+        ##
 
 
     def is_in_cart(self, name) -> bool:
@@ -39,6 +40,7 @@ class Transaction:
                 break
 
         return result
+        ##
 
 
     def get_item_index(self, name) -> int:
@@ -55,6 +57,7 @@ class Transaction:
                 idx = self.cart.index(line_item)
 
         return idx
+        ##
 
 
     def calc_basket_price(self) -> float:
@@ -68,6 +71,7 @@ class Transaction:
             basket_price += line_item.get("qty") * line_item.get("price")
 
         return basket_price
+        ##
 
 
     def print_price_breakdown(self) -> None:
@@ -81,18 +85,21 @@ class Transaction:
         print(f"Basket price: {basket_price}")
         print(f"Discount: {discount_price}")
         print(f"You pay: {payable_price}\n")
+        ##
 
 
     def check_order(self) -> None:
         """Pretty prints the order as an ascii table."""
         print(f"Transaction number: {self.id}")
         print(f"Your cart:\n{self.cart}\n")
+        ##
 
 
     def reset_transaction(self) -> None:
         """Resetting transaction by deleting all cart items."""
         self.cart = []
         print(f"Reset for transaction #{self.id} is successful. Your cart is now empty.\n")
+        ##
 
 
     def add_item(self, name, qty, price) -> None:
@@ -132,6 +139,7 @@ class Transaction:
             }
             self.cart.append(new_item)
             print(f"{qty}x {name} has been added to the cart.\n")
+        ##
 
 
     def delete_item(self, name) -> None:
@@ -152,6 +160,7 @@ class Transaction:
         # Return error if item is not found
         else:
             print(f"Delete item failed: {name} is not found.\n")
+        ##
 
 
     def update_item_name(self, name, new_name) -> None:
@@ -171,7 +180,7 @@ class Transaction:
         else:
             print(f"Item {name} is not found.")
             print("Please recheck name you've inputted.\n")
-            
+        ##
 
 
 ##
