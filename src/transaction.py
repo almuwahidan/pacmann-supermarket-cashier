@@ -119,7 +119,7 @@ class Transaction:
         
         # If duplicates, then return error
         elif self.is_in_cart(name) == True:
-            print("App error: Failed to add new item.")
+            print(f"App error: Failed to add new item {name}.")
             print("An item with the same name is already in the system.")
             print("Please recheck name, or update the item instead.\n")
         
