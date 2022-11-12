@@ -6,7 +6,7 @@
 # Libraries
 ##
 
-import tabulate # pretty printing tables
+from tabulate import tabulate # pretty printing tables
 from itertools import count # creating unique id in classes
 from payments import calc_discount
 
@@ -89,9 +89,22 @@ class Transaction:
 
 
     def check_order(self) -> None:
-        """Pretty prints the order as an ascii table."""
+        """Pretty prints the order as a table."""
+
+        header = [{'#': '#', 'name': 'Name', 'qty': 'Qty', 'price': 'Price per qty'}]
+        cart_copy = self.cart.copy()
+        i = 1
+
+        for line_item in cart_copy:
+            line_item['#'] = i
+            i += 1
+
+        lst = header + cart_copy
+
         print(f"Transaction number: {self.id}")
-        print(f"Your cart:\n{self.cart}\n")
+        print(f"Your cart:")
+
+        print(tabulate(lst, headers='firstrow', tablefmt='fancy_grid'))
         ##
 
 
@@ -248,8 +261,8 @@ if __name__ == "__main__":
     # t.add_item(name=100, qty="Tempe", price=100.00)
     # t.add_item(name="Tempe", qty=0, price=100.00)
     # t.add_item(name="Tempe", qty=100, price=100.00)
-    # t.add_item(name="Tempe", qty=1, price=100.00)
-    # t.check_order()
+    t.add_item(name="Tempe", qty=1, price=100.00)
+    t.check_order()
 
     # # Test: delete item
     # print("== Delete Item ==")
@@ -299,16 +312,16 @@ if __name__ == "__main__":
     # t.update_item_qty(name="Tempe", new_qty=0)
     # t.check_order()
 
-    # Test: Update price
-    t.add_item(name="Tempe", qty=1, price=200000)
-    t.check_order()
-    t.update_item_price(name=100, new_price=100)
-    t.update_item_price(name="Tempe", new_price="Tempe")
-    t.update_item_price(name="Tempe", new_price=100)
-    t.check_order()
-    t.update_item_price(name="Tempe", new_price=100.00)
-    t.update_item_price(name="Tempe", new_price=0)
-    t.check_order()
-    t.update_item_price(name="Tempe", new_price=0.1)
-    t.check_order()
+    # # Test: Update price
+    # t.add_item(name="Tempe", qty=1, price=200000)
+    # t.check_order()
+    # t.update_item_price(name=100, new_price=100)
+    # t.update_item_price(name="Tempe", new_price="Tempe")
+    # t.update_item_price(name="Tempe", new_price=100)
+    # t.check_order()
+    # t.update_item_price(name="Tempe", new_price=100.00)
+    # t.update_item_price(name="Tempe", new_price=0)
+    # t.check_order()
+    # t.update_item_price(name="Tempe", new_price=0.1)
+    # t.check_order()
 
