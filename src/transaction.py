@@ -181,6 +181,28 @@ class Transaction:
             print(f"Item {name} is not found.")
             print("Please recheck name you've inputted.\n")
         ##
+            
+
+    def update_item_qty(self, name, new_qty) -> None:
+        """Update a line item's quantity within the shopping cart."""
+
+        # Check arguments data types
+        if not (isinstance(name, str) and isinstance(new_qty, int)):
+            print("App error: Failed to update item quantity.")
+            print("Please check the input:")
+            print("- Name should be text")
+            print("- New quantity should be integer.\n")
+
+        # Updates item name if found
+        elif self.get_item_index(name) is not None:
+            self.cart[self.get_item_index(name)]['qty'] = new_qty
+            print(f"Item {name}'s quantity has been changed to {new_qty}.\n")
+            
+        # Return error if item is not found
+        else:
+            print(f"Item {name} is not found.")
+            print("Please recheck name you've inputted.\n")
+        ##
 
 
 ##
@@ -228,11 +250,19 @@ if __name__ == "__main__":
     # print("500k +1 basket: 0.1 discount")
     # t.print_price_breakdown()
 
-    # Test: Update name
+    # # Test: Update name
+    # t.add_item(name="Tempe", qty=1, price=200000)
+    # t.check_order()
+    # t.update_item_name(name=100, new_name="Tempeeeee")
+    # t.update_item_name(name="Tempe", new_name=100)
+    # t.update_item_name(name="Tempeh", new_name="Tempeeeee")
+    # t.update_item_name(name="Tempe", new_name="Tempeeeee")
+    # t.check_order()
+
+    # Test: Update quantity
     t.add_item(name="Tempe", qty=1, price=200000)
     t.check_order()
-    t.update_item_name(name=100, new_name="Tempeeeee")
-    t.update_item_name(name="Tempe", new_name=100)
-    t.update_item_name(name="Tempeh", new_name="Tempeeeee")
-    t.update_item_name(name="Tempe", new_name="Tempeeeee")
+    t.update_item_qty(name=100, new_qty=100)
+    t.update_item_qty(name="Tempe", new_qty="Tempe")
+    t.update_item_qty(name="Tempe", new_qty=100)
     t.check_order()
