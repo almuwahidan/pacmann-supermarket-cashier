@@ -154,6 +154,26 @@ class Transaction:
             print(f"Delete item failed: {name} is not found.\n")
 
 
+    def update_item_name(self, name, new_name) -> None:
+        """Update a line item's name within the shopping cart."""
+
+        # Check arguments data types
+        if not (isinstance(name, str) and isinstance(new_name, str)):
+            print("App error: Failed to update item name.")
+            print("Please check the input: Name and New Name should be text.\n")
+
+        # Updates item name if found
+        elif self.get_item_index(name) is not None:
+            self.cart[self.get_item_index(name)]['name'] = new_name
+            print(f"Item {name}'s name has been changed to {new_name}.\n")
+            
+        # Return error if item is not found
+        else:
+            print(f"Item {name} is not found.")
+            print("Please recheck name you've inputted.\n")
+            
+
+
 ##
 # Module testing
 ##
@@ -169,15 +189,15 @@ if __name__ == "__main__":
     # t.add_item(name="Tempe", qty=1, price=100.00)
     # t.check_order()
 
-    # Test: delete item
-    print("== Delete Item ==")
-    t.add_item(name="Tahu", qty=10, price=100.00)
-    t.add_item(name="Tempe", qty=10, price=100.00)
-    t.add_item(name="Beras", qty=10, price=100.00)
-    t.delete_item(name="Combro")
-    t.check_order()
-    t.delete_item(name="Tempe")
-    t.check_order()
+    # # Test: delete item
+    # print("== Delete Item ==")
+    # t.add_item(name="Tahu", qty=10, price=100.00)
+    # t.add_item(name="Tempe", qty=10, price=100.00)
+    # t.add_item(name="Beras", qty=10, price=100.00)
+    # t.delete_item(name="Combro")
+    # t.check_order()
+    # t.delete_item(name="Tempe")
+    # t.check_order()
 
     # # Test: reset order
     # t.add_item(name="Tempe", qty=100, price=100.00)
@@ -198,3 +218,12 @@ if __name__ == "__main__":
     # t.add_item(name="Yoyoyo", qty=1, price=1)
     # print("500k +1 basket: 0.1 discount")
     # t.print_price_breakdown()
+
+    # Test: Update name
+    t.add_item(name="Tempe", qty=1, price=200000)
+    t.check_order()
+    t.update_item_name(name=100, new_name="Tempeeeee")
+    t.update_item_name(name="Tempe", new_name=100)
+    t.update_item_name(name="Tempeh", new_name="Tempeeeee")
+    t.update_item_name(name="Tempe", new_name="Tempeeeee")
+    t.check_order()
