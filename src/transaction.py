@@ -193,10 +193,41 @@ class Transaction:
             print("- Name should be text")
             print("- New quantity should be integer.\n")
 
-        # Updates item name if found
+        # TODO -- handle quantity < 1
+
+        # Updates item quantity if found
         elif self.get_item_index(name) is not None:
             self.cart[self.get_item_index(name)]['qty'] = new_qty
             print(f"Item {name}'s quantity has been changed to {new_qty}.\n")
+            
+        # Return error if item is not found
+        else:
+            print(f"Item {name} is not found.")
+            print("Please recheck name you've inputted.\n")
+        ##
+
+
+    def update_item_price(self, name, new_price) -> None:
+        """Update a line item's quantity within the shopping cart.
+        argument new_price -- (int or float) new price set by user.
+        """
+
+        # Check arguments data types
+        if not (isinstance(name, str) and (isinstance(new_price, int) or isinstance(new_price, float))):
+            print("App error: Failed to update item price.")
+            print("Please check the input:")
+            print("- Name should be text")
+            print("- New price should be integer or float.\n")
+
+        # Return error if new price <= 0
+        elif new_price < 0.1:
+            print("App error: Failed to update item price.")
+            print("Item price cannot be lower than 0.1\n")
+
+        # Updates item price if found
+        elif self.get_item_index(name) is not None:
+            self.cart[self.get_item_index(name)]['price'] = round(new_price*1.0, 2)
+            print(f"Item {name}'s price has been changed to {new_price}.\n")
             
         # Return error if item is not found
         else:
@@ -259,10 +290,25 @@ if __name__ == "__main__":
     # t.update_item_name(name="Tempe", new_name="Tempeeeee")
     # t.check_order()
 
-    # Test: Update quantity
+    # # Test: Update quantity
+    # t.add_item(name="Tempe", qty=1, price=200000)
+    # t.check_order()
+    # t.update_item_qty(name=100, new_qty=100)
+    # t.update_item_qty(name="Tempe", new_qty="Tempe")
+    # t.update_item_qty(name="Tempe", new_qty=100)
+    # t.update_item_qty(name="Tempe", new_qty=0)
+    # t.check_order()
+
+    # Test: Update price
     t.add_item(name="Tempe", qty=1, price=200000)
     t.check_order()
-    t.update_item_qty(name=100, new_qty=100)
-    t.update_item_qty(name="Tempe", new_qty="Tempe")
-    t.update_item_qty(name="Tempe", new_qty=100)
+    t.update_item_price(name=100, new_price=100)
+    t.update_item_price(name="Tempe", new_price="Tempe")
+    t.update_item_price(name="Tempe", new_price=100)
     t.check_order()
+    t.update_item_price(name="Tempe", new_price=100.00)
+    t.update_item_price(name="Tempe", new_price=0)
+    t.check_order()
+    t.update_item_price(name="Tempe", new_price=0.1)
+    t.check_order()
+
