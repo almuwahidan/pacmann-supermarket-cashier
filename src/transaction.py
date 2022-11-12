@@ -5,6 +5,7 @@
 ##
 # Libraries
 ##
+
 import tabulate # pretty printing tables
 from itertools import count # creating unique id in classes
 from payments import calc_discount
@@ -38,6 +39,22 @@ class Transaction:
                 break
 
         return result
+
+
+    def get_item_index(self, name) -> int:
+        """Get a line item's index within the shopping cart.
+        
+        return idx -- (int) index of item in the list. If item is not found, return None.
+        """
+        
+        idx = None
+
+        # iterate thru the cart to find the item
+        for line_item in self.cart:
+            if line_item.get("name").lower() == name.lower():
+                idx = self.cart.index(line_item)
+
+        return idx
 
 
     def calc_basket_price(self) -> float:
@@ -118,7 +135,7 @@ class Transaction:
 
 
     def delete_item(self, name) -> None:
-        """Delete an item from the shopping cart."""
+        """Delete a line item from the shopping cart."""
 
         is_found = False
 
@@ -127,20 +144,14 @@ class Transaction:
             print("App error: Failed to remove item.")
             print("Please check the input: Name should be text.\n")
 
-        # iterate thru the cart, delete first occurence of item
-        else :
-            for line_item in self.cart:
+        # Deletes the item if found
+        elif self.get_item_index(name) is not None:
+            item = self.cart.pop(self.get_item_index(name))
+            print(f"{item['qty']}x {item['name']} has been removed from the cart.\n")
 
-                if line_item.get("name").lower() == name.lower():
-                    print(f"{line_item.get('qty')}x {line_item.get('name')} has been removed from the cart.\n")
-                    self.cart.remove(line_item)
-                    is_found = True
-                    break
-
-        # return error if item is not found
-        if is_found == False:
+        # Return error if item is not found
+        else:
             print(f"Delete item failed: {name} is not found.\n")
-
 
 
 ##
@@ -158,13 +169,15 @@ if __name__ == "__main__":
     # t.add_item(name="Tempe", qty=1, price=100.00)
     # t.check_order()
 
-    # # Test: delete item
-    # print("== Delete Item ==")
-    # t.add_item(name="Tahu", qty=10, price=100.00)
-    # t.delete_item(name="Combro")
-    # t.check_order()
-    # t.delete_item(name="Tahu")
-    # t.check_order()
+    # Test: delete item
+    print("== Delete Item ==")
+    t.add_item(name="Tahu", qty=10, price=100.00)
+    t.add_item(name="Tempe", qty=10, price=100.00)
+    t.add_item(name="Beras", qty=10, price=100.00)
+    t.delete_item(name="Combro")
+    t.check_order()
+    t.delete_item(name="Tempe")
+    t.check_order()
 
     # # Test: reset order
     # t.add_item(name="Tempe", qty=100, price=100.00)
@@ -172,16 +185,16 @@ if __name__ == "__main__":
     # t.reset_transaction()
     # t.check_order()
 
-    # Test: payments
-    t.add_item(name="Tempe", qty=1, price=200000)
-    print("200k basket: 0 discount")
-    t.print_price_breakdown()
-    t.add_item(name="Tahu", qty=1, price=100000)
-    print("300k basket: 0.05 discount")
-    t.print_price_breakdown()
-    t.add_item(name="Combro", qty=1, price=200000)
-    print("500k basket: 0.08 discount")
-    t.print_price_breakdown()
-    t.add_item(name="Yoyoyo", qty=1, price=1)
-    print("500k +1 basket: 0.1 discount")
-    t.print_price_breakdown()
+    # # Test: payments
+    # t.add_item(name="Tempe", qty=1, price=200000)
+    # print("200k basket: 0 discount")
+    # t.print_price_breakdown()
+    # t.add_item(name="Tahu", qty=1, price=100000)
+    # print("300k basket: 0.05 discount")
+    # t.print_price_breakdown()
+    # t.add_item(name="Combro", qty=1, price=200000)
+    # print("500k basket: 0.08 discount")
+    # t.print_price_breakdown()
+    # t.add_item(name="Yoyoyo", qty=1, price=1)
+    # print("500k +1 basket: 0.1 discount")
+    # t.print_price_breakdown()
