@@ -8,6 +8,7 @@
 import os # for clear screen
 from transaction import Transaction
 
+
 ##
 # Supporting functions
 ##
@@ -21,9 +22,10 @@ def clear_screen():
 def add_item(t_obj):
     """Interface to add item to the Transaction object.
 
-    argument t_obj -- (Transaction) instance from Transaction class.
+    Arguments:
+    t_obj -- (Transaction) instance from Transaction class.
     """
-    
+
     print("\n== Add a new item ==")
     
     name = input("Item name: ")
@@ -44,8 +46,33 @@ def add_item(t_obj):
         print("- Quantity should be integer")
         print("- Price should be integer or float\n")
 
-    input("Press Enter to continue...")
+    input("Press Enter to go back to main menu...")
     clear_screen()
+    ##
+
+
+def remove_item(t_obj):
+    """Interface to remove one item from the Transaction object.
+
+    Arguments:
+    t_obj -- (Transaction) instance from Transaction class.
+    """
+    
+    print("\n == Remove one item ==\n")
+    t.check_order()
+    name = input("Name of the item you'd like to delete: ")
+
+    try:
+        name = str(name)
+
+        t.delete_item(name=name)
+
+    except ValueError:
+        print("App Error: Data type mismatch. Name should be alphanumeric.")
+
+    input("Press Enter to go back to main menu...")
+    clear_screen()
+
     ##
 
 
@@ -62,4 +89,6 @@ if __name__ == "__main__":
     t = Transaction()
 
     add_item(t)
+    t.check_order()
+    remove_item(t)
     t.check_order()
