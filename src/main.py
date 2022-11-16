@@ -60,7 +60,7 @@ def remove_item(t_obj):
     """
     
     print("\n == Remove one item ==\n")
-    t.check_order()
+    t_obj.check_order()
     name = input("Name of the item you'd like to delete: ")
 
     try:
@@ -91,7 +91,7 @@ def update_item(t_obj):
     # Check for name input data type
     try:
         name = str(name)
-        line_item = t.get_item(name=name)
+        line_item = t_obj.get_item(name=name)
     except ValueError:
         print("App Error: Data type mismatch. Name should be alphanumeric.")
 
@@ -112,15 +112,15 @@ def update_item(t_obj):
 
             if option == 1:
                 new_name = str(input("New item name: "))
-                t.update_item_name(name=name, new_name=new_name)
+                t_obj.update_item_name(name=name, new_name=new_name)
 
             elif option == 2:
                 new_qty = int(input("New item quantity: "))
-                t.update_item_qty(name=name, new_qty=new_qty)
+                t_obj.update_item_qty(name=name, new_qty=new_qty)
 
             elif option == 3:
                 new_price = float(input("New item price: "))
-                t.update_item_price(name=name, new_price=new_price)
+                t_obj.update_item_price(name=name, new_price=new_price)
 
             else:
                 print("Option is unavailable.\n")
