@@ -156,7 +156,36 @@ def check_cart(t_obj):
     t_obj -- (Transaction) instance from Transaction class.
     """
 
+    print("\n== Check Shopping Cart ==\n")
     t_obj.check_order()
+    input("\nPress Enter to go back to main menu...")
+    clear_screen()
+    ##
+
+
+def print_pricing(t_obj):
+    """Interface to print price breakdown.
+    
+    Arguments:
+    t_obj -- (Transaction) instance from Transaction class.
+    """
+
+    print("\n== Pricing ==\n")
+    t_obj.print_price_breakdown()
+    input("\nPress Enter to go back to main menu...")
+    clear_screen()
+    ##
+
+
+def empty_cart(t_obj):
+    """Interface to empty the shopping cart.
+
+    Arguments:
+    t_obj -- (Transaction) instance from Transaction class.
+    """
+
+    print("\n== Reset transaction ==\n")
+    t_obj.reset_transaction()
     input("\nPress Enter to go back to main menu...")
     clear_screen()
     ##
@@ -202,10 +231,10 @@ def main_menu():
             remove_item(t)
 
         elif option == 5:
-            t.print_price_breakdown()
+            print_pricing(t)
 
         elif option == 6:
-            t.reset_transaction()
+            empty_cart(t)
 
         elif option == 7:
             is_system_booted = False
