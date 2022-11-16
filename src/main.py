@@ -7,7 +7,13 @@
 ##
 import os # for clear screen
 from transaction import Transaction
-import pdb
+from tabulate import tabulate # for pretty printing main menu
+
+##
+# Global variable
+##
+
+is_system_booted = True
 
 
 ##
@@ -18,6 +24,7 @@ def clear_screen():
 
     import os
     os.system('cls' if os.name == 'nt' else 'clear')
+    ##
 
 
 def add_item(t_obj):
@@ -145,6 +152,56 @@ def update_item(t_obj):
 ##
 # Main menu function
 ##
+def main_menu():
+    """The main menu of the cashier system."""
+    
+    global is_system_booted
+    option = None
+    menu_header = ["Option", "Menu"]
+    menu_contents = [(1, "Check shopping cart"),
+            (2, "Add an item to the cart"),
+            (3, "Update an item"),
+            (4, "Remove an item"),
+            (5, "Calculate price"),
+            (6, "Reset transaction"),
+            (7, "Quit")
+    ]
+
+    # The main menu
+    print("Main menu")
+    print("---------")
+    print(tabulate(menu_contents, headers=menu_header, tablefmt='psql', showindex='yes'))
+
+    # Choose main menu option
+    try:
+        option = int(input("Input a number to pick an option: "))
+
+        if option == 1:
+            t.check_order()
+
+        elif option == 2:
+            add_item(t)
+
+        elif option == 3:
+            update_item(t)
+
+        elif option == 4:
+            remove_item(t)
+
+        elif option == 5:
+            t.print_price_breakdown()
+
+        elif option == 6:
+            t.reset_transaction()
+
+        elif option == 7:
+            is_system_booted = False
+
+        else:
+            print("Option is unavailable.\n")
+
+    except ValueError:
+        print("Check data: input should be an integer from 1 to 7.\n")
 
 
 ##
@@ -152,10 +209,15 @@ def update_item(t_obj):
 ##
 
 if __name__ == "__main__":
-    t = Transaction()
-    pdb.set_trace()
 
-    add_item(t)
-    t.check_order()
-    update_item(t)
-    t.check_order()
+    t = Transaction()
+
+    input("Booting up..... done. Press Enter to continue.")
+    clear_screen()
+
+    while is_system_booted:
+        main_menu()
+    
+    else:
+        input("Press Enter to shut down... Good work for today!\n")
+        clear_screen()
