@@ -9,6 +9,7 @@
 from tabulate import tabulate # pretty printing tables
 from itertools import count # creating unique id in classes
 from payments import calc_discount
+import pdb
 
 
 ##
@@ -55,8 +56,26 @@ class Transaction:
         for line_item in self.cart:
             if line_item.get("name").lower() == name.lower():
                 idx = self.cart.index(line_item)
+                break
 
         return idx
+        ##
+
+
+    def get_item(self, name) -> dict:
+        """Gets item object given the name of the item.
+        
+        return item -- (dict) dictionary containing 'name', 'qty', 'price' of a line item. None if not found.
+        """
+
+        item_found = None
+
+        # iterate thru the cart to find the item
+        for line_item in self.cart:
+            if line_item.get("name").lower() == name.lower():
+                item_found = line_item
+
+        return item_found
         ##
 
 
@@ -125,7 +144,9 @@ class Transaction:
         """
 
         # Return error if arguments are of different type
-        if not (isinstance(name, str) and isinstance(qty, int) and isinstance(price, float)):
+        if not (isinstance(name, str)
+                and isinstance(qty, int)
+                and (isinstance(price, float) or isinstance(price, int))):
             raise ValueError("Data type mismatch.")
 
         # If quantity is 0, return error
@@ -243,6 +264,7 @@ class Transaction:
 
 if __name__ == "__main__":
     t = Transaction()
+    pdb.set_trace()
 
     # # Test: adding items
     # print("== Add Item ==")
@@ -250,7 +272,7 @@ if __name__ == "__main__":
     # t.add_item(name="Tempe", qty=0, price=100.00)
     # t.add_item(name="Tempe", qty=100, price=100.00)
     # t.add_item(name="Tempe", qty=1, price=100.00)
-    t.check_order()
+    # t.check_order()
 
     # # Test: delete item
     # print("== Delete Item ==")
@@ -301,7 +323,7 @@ if __name__ == "__main__":
     # t.check_order()
 
     # # Test: Update price
-    # t.add_item(name="Tempe", qty=1, price=200000)
+    t.add_item(name="Tempe", qty=1, price=200000)
     # t.check_order()
     # t.update_item_price(name=100, new_price=100)
     # t.update_item_price(name="Tempe", new_price="Tempe")
@@ -312,4 +334,9 @@ if __name__ == "__main__":
     # t.check_order()
     # t.update_item_price(name="Tempe", new_price=0.1)
     # t.check_order()
+
+    # Test: Get item
+    t.check_order()
+    t.get_item(name="Tempe")
+    t.get_item(name="22")
 
