@@ -125,12 +125,8 @@ class Transaction:
         """
 
         # Return error if arguments are of different type
-        # TODO -- handle price data type
-        if not (isinstance(name, str) and isinstance(qty, int)):
-            print("App error: Failed to add new item.")
-            print("Please check the input:")
-            print("- Name should be text")
-            print("- Quantity should be integer\n")
+        if not (isinstance(name, str) and isinstance(qty, int) and isinstance(price, float)):
+            raise ValueError("Data type mismatch.")
 
         # If quantity is 0, return error
         elif qty == 0:
@@ -162,8 +158,7 @@ class Transaction:
 
         # Return error if arguments are of different type
         if not isinstance(name, str):
-            print("App error: Failed to remove item.")
-            print("Please check the input: Name should be text.\n")
+            raise ValueError("Data type mismatch.")
 
         # Deletes the item if found
         elif self.get_item_index(name) is not None:
@@ -181,8 +176,7 @@ class Transaction:
 
         # Check arguments data types
         if not (isinstance(name, str) and isinstance(new_name, str)):
-            print("App error: Failed to update item name.")
-            print("Please check the input: Name and New Name should be text.\n")
+            raise ValueError("Data type mismatch.")
 
         # Updates item name if found
         elif self.get_item_index(name) is not None:
@@ -201,10 +195,7 @@ class Transaction:
 
         # Check arguments data types
         if not (isinstance(name, str) and isinstance(new_qty, int)):
-            print("App error: Failed to update item quantity.")
-            print("Please check the input:")
-            print("- Name should be text")
-            print("- New quantity should be integer.\n")
+            raise ValueError("Data type mismatch.")
 
         # TODO -- handle quantity < 1
 
@@ -227,10 +218,7 @@ class Transaction:
 
         # Check arguments data types
         if not (isinstance(name, str) and (isinstance(new_price, int) or isinstance(new_price, float))):
-            print("App error: Failed to update item price.")
-            print("Please check the input:")
-            print("- Name should be text")
-            print("- New price should be integer or float.\n")
+            raise ValueError("Data type mismatch.")
 
         # Return error if new price <= 0
         elif new_price < 0.1:
@@ -261,7 +249,7 @@ if __name__ == "__main__":
     # t.add_item(name=100, qty="Tempe", price=100.00)
     # t.add_item(name="Tempe", qty=0, price=100.00)
     # t.add_item(name="Tempe", qty=100, price=100.00)
-    t.add_item(name="Tempe", qty=1, price=100.00)
+    # t.add_item(name="Tempe", qty=1, price=100.00)
     t.check_order()
 
     # # Test: delete item
