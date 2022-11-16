@@ -119,10 +119,15 @@ class Transaction:
 
         lst = header + cart_copy
 
-        print(f"Transaction number: {self.id}")
-        print(f"Your cart:")
+        # Print list contents if not empty
+        if len(cart_copy) != 0:
+            print(f"Transaction number: {self.id}")
+            print("Your cart:")
+            print(tabulate(lst, headers='firstrow', tablefmt='fancy_grid'))
 
-        print(tabulate(lst, headers='firstrow', tablefmt='fancy_grid'))
+        # If cart is empty, give notification
+        else:
+            print("Your cart is empty.\n")
         ##
 
 

@@ -84,7 +84,7 @@ def remove_item(t_obj):
 
 
 def update_item(t_obj):
-    """Interface to  update one item from the Transaction object.
+    """Interface to update one item from the Transaction object.
 
     Arguments:
     t_obj -- (Transaction) instance from Transaction class.
@@ -149,6 +149,19 @@ def update_item(t_obj):
     ##
 
 
+def check_cart(t_obj):
+    """Interface to check shopping cart.
+    
+    Arguments:
+    t_obj -- (Transaction) instance from Transaction class.
+    """
+
+    t_obj.check_order()
+    input("\nPress Enter to go back to main menu...")
+    clear_screen()
+    ##
+
+
 ##
 # Main menu function
 ##
@@ -177,7 +190,7 @@ def main_menu():
         option = int(input("Input a number to pick an option: "))
 
         if option == 1:
-            t.check_order()
+            check_cart(t)
 
         elif option == 2:
             add_item(t)
