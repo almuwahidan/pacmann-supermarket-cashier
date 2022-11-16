@@ -9,7 +9,6 @@
 from tabulate import tabulate # pretty printing tables
 from itertools import count # creating unique id in classes
 from payments import calc_discount
-import pdb
 
 
 ##
@@ -264,7 +263,6 @@ class Transaction:
 
 if __name__ == "__main__":
     t = Transaction()
-    pdb.set_trace()
 
     # # Test: adding items
     # print("== Add Item ==")
@@ -334,9 +332,4 @@ if __name__ == "__main__":
     # t.check_order()
     # t.update_item_price(name="Tempe", new_price=0.1)
     # t.check_order()
-
-    # Test: Get item
-    t.check_order()
-    t.get_item(name="Tempe")
-    t.get_item(name="22")
 
