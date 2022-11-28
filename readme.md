@@ -9,7 +9,9 @@ This program simulates how shopping lists work -- you can:
 - Update the item information
 - Check how much you have to pay
 
-You can see the technical documentations in [docs.md](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/docs.md).
+You can see the:
+- technical documentations in [docs.md](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/docs.md).
+- demonstrations based on Pacmann's scenarios in [demo.md](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/demo.md)
 
 ## How to run
 1. Clone this repo to your local env
