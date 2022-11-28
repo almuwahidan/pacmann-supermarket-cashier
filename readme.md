@@ -1,4 +1,4 @@
-# Pacmann Python Project: Supermarket Cashier
+# Pacmann Python Project: Supermarket Cashier System
 
 Muhammad Ibrahim Al Muwahidan
 almuwahidan@gmail.com
@@ -8,6 +8,8 @@ This program simulates how shopping lists work -- you can:
 - Add items into your shopping cart
 - Update the item information
 - Check how much you have to pay
+
+You can see the technical documentations in [docs.md](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/docs.md).
 
 ## How to run
 1. Clone this repo to your local env
