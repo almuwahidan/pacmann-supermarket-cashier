@@ -5,7 +5,7 @@
 The system is created to **assist users in listing down and calculating the prices of their shopping list**.
 
 The objective above is broken down into different functionalities below:
-![Functionalities](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/1-functionalities.png)
+![Functionalities](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/system-functionalities.png)
 
 
 ## Modules
@@ -20,10 +20,10 @@ This system consists of a few modules represented as Python files:
 
 ### Program workflow
 System-level workflow:
-![System-level workflow]()
+![System-level workflow](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/system-level-workflow.png)
 
-Main menu function:
-![Main-menu functions]()
+Main menu workflow:
+![Main-menu workflow](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/main-menu-workflow.png)
 
 
 ### Shopping list data structure
@@ -33,14 +33,22 @@ The shopping list is represented as a `list`, and each item is represented as a 
 - `price` -- representing the price of **one** quantity of the item (float)
 
 This means the whole shopping list will look similar to this:
+
+```python
     [
         {'name': 'Tempe', 'qty': 1, 'price': 10000.00},
         {'name': 'Sampo sachet', 'qty': 10, 'price': 1000.00}
     ]
+```
 
 
-### Functions
-![List of functions]()
+### Attributes and Functions in Transaction class
+
+Attributes in the Transaction class:
+![List of Attributes](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/transaction-attributes.png)
+
+Functions in the Transaction class:
+![List of functions](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/transaction-functions.png)
 
 
 ## Demonstration
