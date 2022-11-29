@@ -20,9 +20,11 @@ This system consists of a few modules represented as Python files:
 
 ### Program workflow
 System-level workflow:
+
 ![System-level workflow](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/system-level-workflow.png)
 
 Main menu workflow:
+
 ![Main-menu workflow](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/main-menu-workflow.png)
 
 
@@ -45,9 +47,11 @@ This means the whole shopping list will look similar to this:
 ### Attributes and Functions in Transaction class
 
 Attributes in the Transaction class:
+
 ![List of Attributes](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/transaction-attributes.png)
 
 Functions in the Transaction class:
+
 ![List of functions](https://github.com/almuwahidan/pacmann-supermarket-cashier/blob/main/img/transaction-functions.png)
 
 
